@@ -1,7 +1,11 @@
 package edu.monash.fit2099.engine;
 
+import game.ActionFactory;
+import game.StunPowder;
+
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Class representing the Player.
@@ -20,6 +24,9 @@ public class Player extends Actor {
 		super(name, displayChar, priority, hitPoints);
 	}
 
+
+
+
 	/**
 	 * Play a turn. Doing this means displaying a menu to the user and getting their selected option.
 	 *
@@ -33,6 +40,22 @@ public class Player extends Actor {
 	 */
 	@Override
 	public Action playTurn(Actions actions, GameMap map, Display display) {
+		// If player is stunned, return a skip turn action
+		for (Item item : inventory){
+			if (item instanceof StunPowder){
+				// increase use count of stun powder by 1
+				((StunPowder) item).use();
+
+				// If player stunned for 2 rounds, remove stun powder
+				if (((StunPowder) item).expired()){
+					inventory.remove(item);
+				}
+
+				return new SkipTurnAction();
+			}
+		}
+
+		// Else get players turn
 		return showMenu(actions, display);
 	}
 

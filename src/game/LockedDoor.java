@@ -17,13 +17,13 @@ public class LockedDoor extends Ground {
 	
 	@Override
 	public Actions allowableActions(Actor actor, Location location, String direction){
-		// If actor has a key
+		// If actor has a key -> return an UnlockDoorAction
 		for (Item item : actor.getInventory()){
 			if (item instanceof Key){
 				return new Actions(new UnlockDoorAction(location));
 			}
 		}
-		// else
+		// else return empty Action
 		return new Actions();
 
 	}

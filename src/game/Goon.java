@@ -7,20 +7,25 @@ import java.util.List;
 
 public class Goon extends Actor {
 
-    // Goons have 50 hitpoints and are always represented with a &
+    // Goons have 5 hitpoints and are always represented with a &
     public Goon(String name, Actor player) {
         super(name, '&', 5, 5);
-        // Goon insults
+
+        // Create Goon insults and add shouting behaviour
         ArrayList<String> insults = new ArrayList<String>(){{
             add("insult 1");
             add("insult 2");
             add("insult 3");
             add("insult 4");
         }};
+        addBehaviour(new ShoutBehaviour(insults));
+
+        // Add Follow behaviour
+        addBehaviour(new FollowBehaviour(player));
+
+        // All enemies have a key
         this.addItemToInventory(new Key());
 
-        addBehaviour(new ShoutBehaviour(insults));
-        addBehaviour(new FollowBehaviour(player));
     }
     private List<ActionFactory> actionFactories = new ArrayList<ActionFactory>();
 
@@ -30,6 +35,7 @@ public class Goon extends Actor {
 
     @Override
     public Action playTurn(Actions actions, GameMap map, Display display) {
+        // Go through each behaviour, if no action is returned, execute a standard Actor turn
         for (ActionFactory factory : actionFactories) {
             Action action = factory.getAction(this, map);
             if(action != null)

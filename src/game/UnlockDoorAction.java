@@ -14,7 +14,10 @@ public class UnlockDoorAction extends Action {
 
     @Override
     public String execute(Actor actor, GameMap map) {
+        // Replace the LockedDoor with an UnlockedDoor at the location
         map.add(new UnlockedDoor(), doorLocation);
+
+        // Return the action description
         return actor + " unlocks the door";
     }
 

@@ -31,7 +31,10 @@ public class Application {
 
 		Actor player = new Player("Player", '@', 1, 100);
 		world.addPlayer(player, gameMap, 2, 2);
-		
+
+		Ninja ninja1 = new Ninja("ninja1",player);
+		gameMap.addActor(ninja1,0,1);
+
 		Goon goon1 = new Goon("goon1",player);
 		gameMap.addActor(goon1, 0, 0);
 		Goon goon2 = new Goon("goon2",player);
