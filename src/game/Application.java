@@ -17,7 +17,7 @@ public class Application {
 				".......................",
 				"....#####....######....",
 				"....+...#....#....#....",
-				"....#........#....#....",
+				"....#...#....#....#....",
 				"....#####....##.###....",
 				".......................",
 				".......................",
@@ -39,6 +39,9 @@ public class Application {
 		gameMap.addActor(goon1, 0, 0);
 		Goon goon2 = new Goon("goon2",player);
 		gameMap.addActor(goon2, 10, 10);
+		
+		RocketPlans plans = new RocketPlans("Plans", 'P');
+		gameMap.addItem(plans, 5, 2);
 			
 		world.run();
 	}
