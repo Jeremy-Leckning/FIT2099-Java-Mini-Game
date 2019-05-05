@@ -9,6 +9,7 @@ public class RocketEngine extends Item {
 	 * @param name
 	 * @param displayChar
 	 */
+	
 	public RocketEngine() {
 		super("Engine", 'E');
 		
