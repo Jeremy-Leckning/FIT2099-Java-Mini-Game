@@ -1,6 +1,4 @@
 package game;
-import java.util.Random;
-
 import edu.monash.fit2099.engine.*;
 
 public class TalkAction extends Action {
@@ -24,9 +22,9 @@ public class TalkAction extends Action {
 	
     @Override
 	public String menuDescription(Actor actor) {
-		return actor + " talks to" + subject;
+		return actor + " talks to " + this.subject;
 	}
-    
+
     @Override
     public String hotKey() {
         return "";

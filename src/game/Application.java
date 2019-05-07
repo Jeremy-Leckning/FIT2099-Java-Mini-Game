@@ -25,9 +25,9 @@ public class Application {
 				".......................",
 				".......................",
 				".......................");
+		
 		gameMap = new GameMap(groundFactory, map);
 		world.addMap(gameMap);
-
 
 		Actor player = new Player("Player", '@', 1, 100);
 		world.addPlayer(player, gameMap, 2, 2);

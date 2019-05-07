@@ -2,12 +2,11 @@ package game;
 
 
 import java.util.Random;
-
 import edu.monash.fit2099.engine.*;
 
 public class Q extends Actor {
 	private Random rand = new Random();
-	
+
 	public Q(int hitPoints) {
 		super("Q", 'Q', 2, hitPoints);
 		this.addItemToInventory(new RocketBody());
@@ -15,7 +14,13 @@ public class Q extends Actor {
 	
 	@Override
 	public Actions getAllowableActions(Actor otherActor, String direction, GameMap map) {
-		return new Actions(new TalkAction(otherActor, this));
+		Actions actionsList = new Actions(new TalkAction(otherActor, this));
+		for (Item item : otherActor.getInventory()){
+			if (item instanceof RocketPlans) {
+				actionsList.add(new GivePlanAction(otherActor, this));
+			}
+		}
+		return actionsList;
 	}
 	
     @Override
@@ -38,8 +43,6 @@ public class Q extends Actor {
         
         // Choose random move
         Action chosenMove = possible_moves.get(rand.nextInt(possible_moves.size()));
-
         return chosenMove;
     }
-
 }
