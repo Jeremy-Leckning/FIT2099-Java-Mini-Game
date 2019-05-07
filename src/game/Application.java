@@ -40,13 +40,12 @@ public class Application {
 		Goon goon2 = new Goon("goon2",player);
 		gameMap.addActor(goon2, 10, 10);
 		
-		Q q = new Q(100, player);
+		Q q = new Q(100);
 		gameMap.addActor(q, 6, 6);
 		
 		// Adding the rocket plans inside a locked room. 
 		RocketPlans plans = new RocketPlans("Plans", 'P');
-		gameMap.addItem(plans, 5, 2);
-			
+		gameMap.addItem(plans, 5, 2);		
 		world.run();
 	}
 }
