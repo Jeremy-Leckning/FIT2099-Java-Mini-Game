@@ -4,8 +4,15 @@ import edu.monash.fit2099.engine.DropItemAction;
 import edu.monash.fit2099.engine.Item;
 import edu.monash.fit2099.engine.PickUpItemAction;
 
+/**
+ * Key to unlock Locked doors
+ * Enemies drop keys when defeated
+ */
 public class Key extends Item {
 
+    /**
+     * Creates a Key item
+     */
     public Key() {
         super("Key", 'K');
 

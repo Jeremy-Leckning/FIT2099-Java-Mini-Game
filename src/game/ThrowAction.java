@@ -5,26 +5,50 @@ import edu.monash.fit2099.engine.*;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Throw Action for Ninja
+ */
 public class ThrowAction extends Action {
     private Actor target;
     private Random rand = new Random();
 
+    /**
+     * Creates a new throw Action
+     * @param target target of the action
+     */
     public ThrowAction(Actor target){
         this.target = target;
     }
 
+    /**
+     * Performs the throw action
+     * @param actor The actor performing the action.
+     * @param map The map the actor is on.
+     * @return description of action performed
+     */
     @Override
     public String execute(Actor actor, GameMap map) {
         String moveDescription = "";
 
+        // execute the throwing segment and append description to final description
         moveDescription += throwStunPowder(actor);
+
+        // Add punctuation to description
         moveDescription += " and then ";
+
+        // execute the moving segment and append description to final description
         moveDescription += moveNinja(actor,map);
 
         return moveDescription;
 
     }
 
+    /**
+     * Handles the Ninjas moving
+     * @param actor Ninja
+     * @param map Game map
+     * @return Description of move
+     */
     private String moveNinja(Actor actor, GameMap map){
         Location here = map.locationOf(actor);
         Actions moves = new Actions();
@@ -47,7 +71,12 @@ public class ThrowAction extends Action {
         return chosenMove.execute(actor,map);
     }
 
-    public String throwStunPowder(Actor actor){
+    /**
+     * Handles ninjas throwing
+     * @param actor ninja
+     * @return description of throw
+     */
+    private String throwStunPowder(Actor actor){
 
         // 50% chance of hitting
         if (rand.nextBoolean()){

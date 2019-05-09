@@ -10,42 +10,55 @@ public class Application {
 	public static void main(String[] args) {
 		World world = new World(new Display());
 
-		FancyGroundFactory groundFactory = new FancyGroundFactory(new Floor(), new Wall(),new LockedDoor());
+		FancyGroundFactory groundFactory = new FancyGroundFactory(new Floor(), new Wall(),new LockedDoor(),new RocketPad());
 		GameMap gameMap;
 
 		List<String> map = Arrays.asList(
 				".......................",
 				"....#####....######....",
-				"....+...#....#....#....",
+				"....+...#....+....#....",
 				"....#...#....#....#....",
-				"....#####....##.###....",
+				"....#####....######....",
 				".......................",
 				".......................",
 				".......................",
-				".......................",
+				"...............~.......",
 				".......................",
 				".......................");
 		
 		gameMap = new GameMap(groundFactory, map);
 		world.addMap(gameMap);
 
-		Actor player = new Player("Player", '@', 1, 100);
-		world.addPlayer(player, gameMap, 2, 2);
+		// Player
+		Actor player = new StunnablePlayer("Player", '@', 1, 100);
+		world.addPlayer(player, gameMap, 9, 10);
 
-		Ninja ninja1 = new Ninja("ninja1",player);
-		gameMap.addActor(ninja1,0,1);
-
-		Goon goon1 = new Goon("goon1",player);
-		gameMap.addActor(goon1, 0, 0);
-		Goon goon2 = new Goon("goon2",player);
-		gameMap.addActor(goon2, 10, 10);
-		
+		// NPCs
 		Q q = new Q(100);
 		gameMap.addActor(q, 6, 6);
+
+		// Enemies
+		Ninja ninja1 = new Ninja("Ninja",player);
+		gameMap.addActor(ninja1,0,1);
+
+		Goon goon1 = new Goon("Senior Goon",player);
+		gameMap.addActor(goon1, 0, 0);
+
+		Goon goon2 = new Goon("Junior Goon",player);
+		gameMap.addActor(goon2, 10, 10);
+
+		Grunt grunt1 = new Grunt("Grunt",player);
+		gameMap.addActor(grunt1,12,9);
+
+		DoctorMaybe DrMaybe = new DoctorMaybe(player);
+		gameMap.addActor(DrMaybe,15,3);
 		
-		// Adding the rocket plans inside a locked room. 
-		RocketPlans plans = new RocketPlans("Plans", 'P');
-		gameMap.addItem(plans, 5, 2);		
+		// Add rocket plans inside a locked room.
+		RocketPlans plans = new RocketPlans();
+		gameMap.addItem(plans, 5, 2);
+
+
+
 		world.run();
 	}
 }

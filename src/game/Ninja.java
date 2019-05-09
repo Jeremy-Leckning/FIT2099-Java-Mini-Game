@@ -6,12 +6,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Ninja Enemy.
+ * Don't move unless player is 5 blocks away
+ * Throws stun powder at enemies which stuns them for 2 turns
+ */
 public class Ninja extends Actor {
-
     private Actor target;
-    private Random rand = new Random();
 
-
+    /**
+     * Creates a Ninja Actor
+     * @param name name of ninja
+     * @param player player the ninja targets
+     */
     public Ninja(String name, Actor player) {
         super(name, 'n', 5, 5);
         this.target = player;
@@ -21,16 +28,29 @@ public class Ninja extends Actor {
 
     }
 
+    /**
+     * Processes Ninjas turn
+     * @param actions collection of possible Actions for this Actor
+     * @param map     the map containing the Actor
+     * @param display the I/O object to which messages may be written
+     * @return Action the ninja takes
+     */
     @Override
     public Action playTurn(Actions actions, GameMap map, Display display) {
 
+        // if player is close enough -> ninja does a throw turn
         if (player5BlocksAway(map)){
             return new ThrowAction(target);
         }
-
+        // Otherwise Ninja does nothing
         return new SkipTurnAction();
     }
 
+    /**
+     * Determines if target is at least 5 blocks away
+     * @param map game map
+     * @return true/false
+     */
     private boolean player5BlocksAway(GameMap map) {
 
         // Get location of Actor and Target

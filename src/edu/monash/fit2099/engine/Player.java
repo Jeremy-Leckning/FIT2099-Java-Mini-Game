@@ -40,22 +40,6 @@ public class Player extends Actor {
 	 */
 	@Override
 	public Action playTurn(Actions actions, GameMap map, Display display) {
-		// If player is stunned, return a skip turn action
-		for (Item item : inventory){
-			if (item instanceof StunPowder){
-				// increase use count of stun powder by 1
-				((StunPowder) item).use();
-
-				// If player stunned for 2 rounds, remove stun powder
-				if (((StunPowder) item).expired()){
-					inventory.remove(item);
-				}
-
-				return new SkipTurnAction();
-			}
-		}
-
-		// Else get players turn
 		return showMenu(actions, display);
 	}
 

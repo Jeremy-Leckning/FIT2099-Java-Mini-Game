@@ -8,6 +8,7 @@ public class Ground implements Skilled, Printable {
 	private Skills skills = new Skills();
 	protected char displayChar;
 
+
 	/**
 	 * Constructor.
 	 *
