@@ -18,10 +18,15 @@ public class GivePlanAction extends Action {
     public String execute(Actor actor, GameMap map) {
 		for (Item item : actor.getInventory()){
 			if (item instanceof RocketPlans){
+				
+				// Swaps Rocket Plans for Rocket Body
 				actor.removeItemFromInventory(item);
+				actor.addItemToInventory(new RocketBody());
 				this.subject.addItemToInventory(item);
+				
+				// Q disappears after handing items
 				map.removeActor(this.subject);
-				return this.actor + " gave Rocket plans to " + this.subject + ", and received Rocket Engine in exchange. "
+				return this.actor + " gave Rocket plans to " + this.subject + ", and received Rocket Body in exchange. "
 						+ "Q disappeared with a cheery wave!!!";
 			}
 		}
