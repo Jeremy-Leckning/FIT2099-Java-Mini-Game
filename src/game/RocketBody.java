@@ -5,6 +5,7 @@ import edu.monash.fit2099.engine.Item;
 
 /**
  * Rocket Body part
+ * Q will give this to the player in return for the rocket plans
  */
 public class RocketBody extends Item {
 

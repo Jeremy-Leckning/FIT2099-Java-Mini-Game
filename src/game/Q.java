@@ -5,14 +5,14 @@ import java.util.Random;
 import edu.monash.fit2099.engine.*;
 
 /**
- * Friendly NPC that accepts plans and gives Rocket body
+ * Friendly NPC that accepts plans and gives Rocket body in exchange
  */
 public class Q extends Actor {
 	private Random rand = new Random();
 
     /**
      * Create a Q Actor
-     * @param hitPoints
+     * @param hitPoints the maximum hitpoints of the actor
      */
 	public Q(int hitPoints) {
 		super("Q", 'Q', 2, hitPoints);
