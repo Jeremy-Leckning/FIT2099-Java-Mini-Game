@@ -10,8 +10,8 @@ public class Application {
 	public static void main(String[] args) {
 		World world = new World(new Display());
 
-		FancyGroundFactory groundFactory = new FancyGroundFactory(new Floor(), new Wall(),new LockedDoor(),new RocketPad());
-		GameMap gameMap;
+		FancyGroundFactory groundFactory = new FancyGroundFactory(new Floor(), new Wall(),new LockedDoor());
+		DisplayableMap gameMap;
 
 		List<String> map = Arrays.asList(
 				".......................",
@@ -22,13 +22,31 @@ public class Application {
 				".......................",
 				".......................",
 				".......................",
-				"...............~.......",
+				".......................",
 				".......................",
 				".......................");
 		
-		gameMap = new GameMap(groundFactory, map);
+        List<String> moonMap = Arrays.asList(
+                "...............",
+                "...............",
+                "...............",
+                "...............",
+                "...............",
+                "...............",
+                "...............",
+                "...............",
+                "...............",
+                "...............");
+        
+        DisplayableMap moon = new DisplayableMap(groundFactory, moonMap, "Moon");
+		gameMap = new DisplayableMap(groundFactory, map, "Earth");
+        
+		gameMap.add(new RocketPad(gameMap, moon), gameMap.at(15, 8));
+		moon.add(new RocketPad(moon, gameMap), moon.at(1, 1));
+		
 		world.addMap(gameMap);
-
+		world.addMap(moon);
+		
 		// Player
 		Actor player = new StunnablePlayer("Player", '@', 1, 100);
 		world.addPlayer(player, gameMap, 9, 10);
@@ -56,7 +74,6 @@ public class Application {
 		// Add rocket plans inside a locked room.
 		RocketPlans plans = new RocketPlans();
 		gameMap.addItem(plans, 5, 2);
-
 
 
 		world.run();

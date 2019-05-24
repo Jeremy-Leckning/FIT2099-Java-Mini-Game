@@ -22,7 +22,7 @@ public class PlaceOnPadAction extends Action {
 
         // Precondition: Item must be rocket body or engine
         if (!(item instanceof RocketBody)&&!(item instanceof RocketEngine)){
-            throw new IllegalArgumentException("Only rocket engines or body can be places on pad");
+            throw new IllegalArgumentException("Only rocket engines or body can be placed on pad");
         }
 
         this.item = item;
