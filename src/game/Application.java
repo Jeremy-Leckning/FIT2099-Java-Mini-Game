@@ -72,15 +72,10 @@ public class Application {
 		DoctorMaybe DrMaybe = new DoctorMaybe(player);
 		gameMap.addActor(DrMaybe,15,3);
 		
-//		Ninja ninja2 = new Ninja("Space Ninja", player);
-//		ninja2.addSkill(GameSkills.SPACETRAVELLER);
-//		moon.addActor(ninja2, 6, 3);
-		
 		Goon goon3 = new Goon("Space Goon", player);
 		goon3.addSkill(GameSkills.SPACETRAVELLER);
 		moon.addActor(goon3, 8, 9);
-		
-		
+			
 		Grunt grunt2 = new Grunt("Space Grunt", player);
 		grunt2.addSkill(GameSkills.SPACETRAVELLER);
 		moon.addActor(grunt2, 1, 6);

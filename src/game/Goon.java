@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Goon enemy
@@ -11,6 +12,7 @@ import java.util.List;
  * Follows player and can shout insults at player
  */
 public class Goon extends Actor {
+	private Random rand = new Random();
 
     /**
      * Creates a goon actor
@@ -60,8 +62,14 @@ public class Goon extends Actor {
             if(action != null)
                 return action;
         }
-
-        return super.playTurn(actions,  map,  display);
+         
+        // Make sure that Goon does not drop key randomly
+        for (Action action : actions) {
+        	if (action instanceof DropItemAction) {
+        		actions.remove(action);
+        	}
+        }
+        return actions.get(rand.nextInt(actions.size()));
     }
 
     @Override
