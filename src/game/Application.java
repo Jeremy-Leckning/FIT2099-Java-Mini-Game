@@ -11,6 +11,7 @@ public class Application {
 		World world = new World(new Display());
 
 		FancyGroundFactory groundFactory = new FancyGroundFactory(new Floor(), new Wall(),new LockedDoor());
+		FancyGroundFactory moonGroundFactory = new FancyGroundFactory(new MoonGround());
 		DisplayableMap gameMap;
 
 		List<String> map = Arrays.asList(
@@ -27,22 +28,22 @@ public class Application {
 				".......................");
 		
         List<String> moonMap = Arrays.asList(
-                "...............",
-                "...............",
-                "...............",
-                "...............",
-                "...............",
-                "...............",
-                "...............",
-                "...............",
-                "...............",
-                "...............");
+                "^^^^^^^^^^^^^^^",
+                "^^^^^^^^^^^^^^^",
+                "^^^^^^^^^^^^^^^",
+                "^^^^^^^^^^^^^^^",
+                "^^^^^^^^^^^^^^^",
+                "^^^^^^^^^^^^^^^",
+                "^^^^^^^^^^^^^^^",
+                "^^^^^^^^^^^^^^^",
+                "^^^^^^^^^^^^^^^",
+                "^^^^^^^^^^^^^^^");
         
-        DisplayableMap moon = new DisplayableMap(groundFactory, moonMap, "Moon");
+        DisplayableMap moon = new DisplayableMap(moonGroundFactory, moonMap, "Moon");
 		gameMap = new DisplayableMap(groundFactory, map, "Earth");
         
 		gameMap.add(new RocketPad(gameMap, moon), gameMap.at(15, 8));
-		moon.add(new RocketPad(moon, gameMap), moon.at(1, 1));
+		moon.add(new RocketPad(moon, gameMap), moon.at(2, 1));
 		
 		world.addMap(gameMap);
 		world.addMap(moon);
@@ -71,9 +72,26 @@ public class Application {
 		DoctorMaybe DrMaybe = new DoctorMaybe(player);
 		gameMap.addActor(DrMaybe,15,3);
 		
+//		Ninja ninja2 = new Ninja("Space Ninja", player);
+//		ninja2.addSkill(GameSkills.SPACETRAVELLER);
+//		moon.addActor(ninja2, 6, 3);
+		
+		Goon goon3 = new Goon("Space Goon", player);
+		goon3.addSkill(GameSkills.SPACETRAVELLER);
+		moon.addActor(goon3, 8, 9);
+		
+		
+		Grunt grunt2 = new Grunt("Space Grunt", player);
+		grunt2.addSkill(GameSkills.SPACETRAVELLER);
+		moon.addActor(grunt2, 1, 6);
+		
 		// Add rocket plans inside a locked room.
 		RocketPlans plans = new RocketPlans();
 		gameMap.addItem(plans, 5, 2);
+		
+		// Add space suit to Earth map
+		SpaceSuit spaceSuit = new SpaceSuit();
+		gameMap.addItem(spaceSuit, 16, 10);
 
 
 		world.run();
