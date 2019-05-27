@@ -1,5 +1,6 @@
 package game;
 
 public enum GameSkills {
-	SPACETRAVELLER;
+	SPACETRAVELLER,
+	SPACEBREATHER;
 }

@@ -42,8 +42,13 @@ public class Application {
         DisplayableMap moon = new DisplayableMap(moonGroundFactory, moonMap, "Moon");
 		gameMap = new DisplayableMap(groundFactory, map, "Earth");
         
-		gameMap.add(new RocketPad(gameMap, moon), gameMap.at(15, 8));
-		moon.add(new RocketPad(moon, gameMap), moon.at(2, 1));
+		gameMap.add(new RocketPad(gameMap, moon, gameMap.at(15,8)), gameMap.at(15, 8));
+		moon.add(new Rocket(moon, gameMap), moon.at(2, 1));
+
+		// delete
+		((RocketPad) gameMap.groundAt(gameMap.at(15, 8))).rocketBuilt(gameMap);
+		gameMap.add(new OxygenDispenser(),gameMap.at(9,9));
+
 		
 		world.addMap(gameMap);
 		world.addMap(moon);
@@ -51,6 +56,10 @@ public class Application {
 		// Player
 		Actor player = new StunnablePlayer("Player", '@', 1, 100);
 		world.addPlayer(player, gameMap, 9, 10);
+
+		// Delete
+		player.addItemToInventory(new SpaceSuit());
+
 
 		// NPCs
 		Q q = new Q(100);
@@ -73,11 +82,9 @@ public class Application {
 		gameMap.addActor(DrMaybe,15,3);
 		
 		Goon goon3 = new Goon("Space Goon", player);
-		goon3.addSkill(GameSkills.SPACETRAVELLER);
 		moon.addActor(goon3, 8, 9);
 			
 		Grunt grunt2 = new Grunt("Space Grunt", player);
-		grunt2.addSkill(GameSkills.SPACETRAVELLER);
 		moon.addActor(grunt2, 1, 6);
 		
 		// Add rocket plans inside a locked room.

@@ -8,16 +8,18 @@ import edu.monash.fit2099.engine.*;
 public class RocketPad extends Ground {
     private boolean engine = false;
     private boolean body = false;
+    private Location location;
     private DisplayableMap departureMap;
 	private DisplayableMap destinationMap;
 
     /**
      * Creates a Rocket Pad
      */
-    public RocketPad(DisplayableMap departure, DisplayableMap destination) {
+    public RocketPad(DisplayableMap departure, DisplayableMap destination, Location location) {
         super('~');
         this.departureMap = departure;
         this.destinationMap = destination;
+        this.location = location;
     }
 
 	/**
@@ -47,10 +49,6 @@ public class RocketPad extends Ground {
                     actions.add(new PlaceOnPadAction(item, this));
                 }
             }
-            
-            if (this.allParts() || this.destinationMap.isEarth()) {
-            	actions.add(new FlyAction(actor, this.departureMap, this.destinationMap));
-            }
         }
 
         // If actor not player or neither items were found empty actions is returned
@@ -77,6 +75,10 @@ public class RocketPad extends Ground {
      */
     public boolean allParts(){
         return this.engine && this.body;
+    }
+
+    public void rocketBuilt(GameMap map){
+        map.add(new Rocket(this.departureMap,this.destinationMap), this.location);
     }
 
 }
