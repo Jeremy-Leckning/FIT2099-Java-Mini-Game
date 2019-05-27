@@ -52,7 +52,6 @@ public class PlaceOnPadAction extends Action {
         // If both engine and body engine are now on pad -> notify player and create rocket
         if (pad.allParts()){
             description += " And successfully builds the rocket!";
-            pad.rocketBuilt(map);
         }
 
         // Remove the item from player's inventory

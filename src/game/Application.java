@@ -41,12 +41,17 @@ public class Application {
         
         DisplayableMap moon = new DisplayableMap(moonGroundFactory, moonMap, "Moon");
 		gameMap = new DisplayableMap(groundFactory, map, "Earth");
-        
-		gameMap.add(new RocketPad(gameMap, moon, gameMap.at(15,8)), gameMap.at(15, 8));
-		moon.add(new Rocket(moon, gameMap), moon.at(2, 1));
 
-		// delete
-		((RocketPad) gameMap.groundAt(gameMap.at(15, 8))).rocketBuilt(gameMap);
+		RocketPad earthPad = new RocketPad(gameMap, moon, gameMap.at(15,8));
+		gameMap.add(earthPad, gameMap.at(15, 8));
+		gameMap.setPad(earthPad);
+
+		RocketPad moonPad = new RocketPad(moon, gameMap,moon.at(2, 1));
+		moonPad.placeBody();
+		moonPad.placeEngine();
+		moon.add(moonPad, moon.at(2, 1));
+		moon.setPad(moonPad);
+
 		gameMap.add(new OxygenDispenser(),gameMap.at(9,9));
 
 		
@@ -55,10 +60,18 @@ public class Application {
 		
 		// Player
 		Actor player = new StunnablePlayer("Player", '@', 1, 100);
-		world.addPlayer(player, gameMap, 9, 10);
+		world.addPlayer(player, gameMap, 10, 4);
 
 		// Delete
 		player.addItemToInventory(new SpaceSuit());
+		player.addItemToInventory(new OxygenTank());
+		player.addItemToInventory(new RocketBody());
+		player.addItemToInventory(new RocketEngine());
+		YugoMaxx ym = new YugoMaxx();
+		gameMap.addActor(ym,1,1);
+		player.addItemToInventory(new WaterPistol(player,ym, gameMap));
+
+		gameMap.add(new WaterPool(), gameMap.at(2,10));
 
 
 		// NPCs
@@ -94,9 +107,6 @@ public class Application {
 		// Add space suit and Oxygen Dispenser to Earth map
 		SpaceSuit spaceSuit = new SpaceSuit();
 		gameMap.addItem(spaceSuit, 21, 5);
-		
-		OxygenDispenser oxygenDispenser = new OxygenDispenser(player);
-		gameMap.addItem(oxygenDispenser, 16, 10);
 
 		world.run();
 	}

@@ -2,18 +2,26 @@ package game;
 
 import edu.monash.fit2099.engine.*;
 
+/**
+ * Oxygen dispensing station
+ */
 public class OxygenDispenser extends Ground {
     private boolean isDispensing = false;
     private boolean tankAvailable = false;
     /**
-     * Constructor.
-     *
-     * @param displayChar character to display for this type of terrain
+     * Creates an oxygen dispenser.
      */
     public OxygenDispenser() {
         super('O');
     }
 
+    /**
+     * Determines actions actors can perform.
+     * @param actor the Actor acting
+     * @param location the current Location
+     * @param direction the direction of the Ground from the Actor
+     * @return allowable Actions
+     */
     @Override
     public Actions allowableActions(Actor actor, Location location, String direction) {
         Actions actions = new Actions();
@@ -43,7 +51,18 @@ public class OxygenDispenser extends Ground {
         return actions;
     }
 
+    /**
+     * Triggers oxygen production
+     */
     public void produceOxygen(){
         this.isDispensing = true;
+    }
+
+    /**
+     * Determines if dispenser is empty and not producing oxygen
+     * @return true/false
+     */
+    public boolean isIdle(){
+        return (!this.isDispensing || !this.tankAvailable);
     }
 }

@@ -2,11 +2,13 @@ package game;
 
 import edu.monash.fit2099.engine.Item;
 
+/**
+ * Space suit for space travel
+ */
 public class SpaceSuit extends Item {
 
 	/**
-	 * @param name
-	 * @param displayChar
+	 * Creates a space suit -  adds SPACETRAVELLER skill.
 	 */
 	public SpaceSuit() {
 		super("Space Suit", 'S');

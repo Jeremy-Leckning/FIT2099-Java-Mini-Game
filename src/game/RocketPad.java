@@ -22,6 +22,10 @@ public class RocketPad extends Ground {
         this.location = location;
     }
 
+    public Location getLocation(){
+        return this.location;
+    }
+
 	/**
      * Determines what actions players can make when next to pad
      * @param actor the Actor acting
@@ -31,27 +35,54 @@ public class RocketPad extends Ground {
      */
     @Override
     public Actions allowableActions(Actor actor, Location location, String direction){
-        Actions actions = new Actions();
 
         // Ensure actor is player
         if (actor instanceof Player) {
 
-            // check player's inventory
-            for (Item item : actor.getInventory()) {
-
-                // Player has Engine
-                if (item instanceof RocketEngine) {
-                    actions.add(new PlaceOnPadAction(item, this));
-                }
-
-                // Player has Body
-                if (item instanceof RocketBody) {
-                    actions.add(new PlaceOnPadAction(item, this));
-                }
+            // Rocket already built
+            if (this.allParts()){
+                return this.getFlyAction(actor);
             }
+
+            // Else return placement actions or empty
+            return this.getPlacementAction(actor);
         }
 
-        // If actor not player or neither items were found empty actions is returned
+        return new Actions();
+    }
+
+    /**
+     * Generates the flying actions of the pad
+     * @param actor Player flying
+     * @return flying action
+     */
+    private Actions getFlyAction(Actor actor){
+        Actions actions = new Actions();
+        actions.add(new FlyAction(actor, this.departureMap, this.destinationMap));
+        return actions;
+    }
+
+    /**
+     * Generates rocket parts placement actions
+     * @param actor Player
+     * @return Allowable actions
+     */
+    private Actions getPlacementAction(Actor actor){
+        Actions actions = new Actions();
+
+        // check player's inventory
+        for (Item item : actor.getInventory()) {
+
+            // Player has Engine
+            if (item instanceof RocketEngine) {
+                actions.add(new PlaceOnPadAction(item, this));
+            }
+
+            // Player has Body
+            if (item instanceof RocketBody) {
+                actions.add(new PlaceOnPadAction(item, this));
+            }
+        }
         return actions;
     }
 
@@ -77,8 +108,6 @@ public class RocketPad extends Ground {
         return this.engine && this.body;
     }
 
-    public void rocketBuilt(GameMap map){
-        map.add(new Rocket(this.departureMap,this.destinationMap), this.location);
-    }
+
 
 }
