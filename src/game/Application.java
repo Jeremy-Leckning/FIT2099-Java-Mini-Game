@@ -84,10 +84,12 @@ public class Application {
 		RocketPlans plans = new RocketPlans();
 		gameMap.addItem(plans, 5, 2);
 		
-		// Add space suit to Earth map
+		// Add space suit and Oxygen Dispenser to Earth map
 		SpaceSuit spaceSuit = new SpaceSuit();
-		gameMap.addItem(spaceSuit, 16, 10);
-
+		gameMap.addItem(spaceSuit, 21, 5);
+		
+		OxygenDispenser oxygenDispenser = new OxygenDispenser(player);
+		gameMap.addItem(oxygenDispenser, 16, 10);
 
 		world.run();
 	}
