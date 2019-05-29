@@ -1,6 +1,6 @@
 package edu.monash.fit2099.demo;
 
-import game.ActionFactory;
+import game.GoonGruntExtention.ActionFactory;
 import edu.monash.fit2099.engine.*;
 
 public class SpitBehaviour extends Action implements ActionFactory{

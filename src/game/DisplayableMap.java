@@ -4,7 +4,7 @@ import java.util.List;
 
 import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.GroundFactory;
-import edu.monash.fit2099.engine.Location;
+import game.RocketExpantion.RocketPad;
 
 /**
  * Extension to game map that has a name and stores rocket pad

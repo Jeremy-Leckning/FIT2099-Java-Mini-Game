@@ -1,11 +1,7 @@
 package edu.monash.fit2099.engine;
 
-import game.ActionFactory;
-import game.StunPowder;
-
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * Class representing the Player.

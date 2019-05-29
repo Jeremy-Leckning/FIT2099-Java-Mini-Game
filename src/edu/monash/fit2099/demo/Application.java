@@ -1,7 +1,6 @@
 package edu.monash.fit2099.demo;
 
 import edu.monash.fit2099.engine.*;
-import game.FollowBehaviour;
 
 import java.util.Arrays;
 import java.util.List;
@@ -52,7 +51,6 @@ public class Application {
         Bug bug = new Bug();
         bug.addItemToInventory(Item.newInventoryItem("rock", '*'));
         bug.actionFactories.add(new SpitBehaviour(player));
-        bug.actionFactories.add(new FollowBehaviour(player));
         gameMap.addActor(bug, 0, 2);
 
         world.run();
