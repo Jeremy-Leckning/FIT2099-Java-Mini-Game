@@ -1,5 +1,7 @@
 package game.MoonExpantion;
 
+import java.util.Random;
+
 import edu.monash.fit2099.engine.*;
 
 /**
@@ -7,6 +9,7 @@ import edu.monash.fit2099.engine.*;
  */
 public class YugoMaxx extends Actor {
     private boolean exoSkeleton;
+	private Random rand = new Random();
 
     /**
      * Creates the boss
@@ -56,7 +59,25 @@ public class YugoMaxx extends Actor {
         // Other actors do nothing
         return new Actions();
     }
-
+    
+    
+    /**
+     * Processes YugoMaxx turn
+     * @param actions collection of possible Actions for this Actor
+     * @param map     the map containing the Actor
+     * @param display the I/O object to which messages may be written
+     * @return Description of the goons turn
+     */
+	@Override
+	public Action playTurn(Actions actions, GameMap map, Display display) {
+		// Making sure YugoMaxx does not pick up items on map(such as water pistol)
+        for (Action action : actions) {
+        	if (action instanceof PickUpItemAction) {
+        		actions.remove(action);
+        	}
+        }
+        return super.playTurn(actions, map, display);
+    }
 
 
 }

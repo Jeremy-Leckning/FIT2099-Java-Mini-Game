@@ -30,9 +30,9 @@ public class Grunt extends Actor {
 				return action;
 		}
 				
-		// Makes sure that Grunt does not drop key randomly
+		// Makes sure that Grunt does not drop key randomly or picks up items on map
 	      for (Action action : actions) {
-	        	if (action instanceof DropItemAction) {
+	        	if (action instanceof DropItemAction || action instanceof PickUpItemAction) {
 	        		actions.remove(action);
 	        	}
 	        }

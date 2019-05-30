@@ -61,9 +61,9 @@ public class Goon extends Actor {
                 return action;
         }
          
-        // Make sure that Goon does not drop key randomly
+        // Make sure that Goon does not drop key randomly or does not pickup item on map
         for (Action action : actions) {
-        	if (action instanceof DropItemAction) {
+        	if (action instanceof DropItemAction || action instanceof PickUpItemAction) {
         		actions.remove(action);
         	}
         }
