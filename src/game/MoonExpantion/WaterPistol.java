@@ -1,6 +1,7 @@
 package game.MoonExpantion;
 
 import edu.monash.fit2099.engine.*;
+import game.GameSkills;
 
 /**
  * Water pistol weapon
@@ -42,20 +43,24 @@ public class WaterPistol extends Item implements IStorageTank {
 
         // Is picked up -> player can shoot if:
 
-        // Player is on same map as YM
-        if( this.map.locationOf(this.player).map() == this.map.locationOf(this.ym).map()){
+        // YM still alive
+        if (this.player.hasSkill(GameSkills.GAMEWINNER)) {
 
-            // YM still has exoskeleton
-            if (this.ym.hasSkeleton()) {
+            // Player is on same map as YM
+            if (this.map.locationOf(this.player).map() == this.map.locationOf(this.ym).map()) {
 
-                // Player to YM line of sight
-                if (this.lineOfSight()) {
+                // YM still has exoskeleton
+                if (this.ym.hasSkeleton()) {
 
-                    // Pistol is filled
-                    if (this.isFilled()) {
+                    // Player to YM line of sight
+                    if (this.lineOfSight()) {
 
-                        // All conditions met -> actor can squirt
-                        actions.add(new SquirtAction(this, ym));
+                        // Pistol is filled
+                        if (this.isFilled()) {
+
+                            // All conditions met -> actor can squirt
+                            actions.add(new SquirtAction(this, ym));
+                        }
                     }
                 }
             }

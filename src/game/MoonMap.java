@@ -16,6 +16,7 @@ import java.util.List;
  */
 class MoonMap extends GameMap implements IPlanetaryMap {
     private FlyAction flyAction;
+    private final int[] padCoords = new int[]{2,1};
 
     /**
      * Creates the moon
@@ -33,7 +34,7 @@ class MoonMap extends GameMap implements IPlanetaryMap {
     void addActorsItems(Player player){
         // Enemies
         YugoMaxx ym = new YugoMaxx();
-        this.addActor(ym,7,7);
+        this.addActor(ym,13,9);
 
         Goon goon = new Goon("Space Goon", player);
         goon.addItemToInventory(new Key());
@@ -44,12 +45,12 @@ class MoonMap extends GameMap implements IPlanetaryMap {
         this.addActor(grunt, 1, 6);
 
         // Water pistol
-        this.addItem(new WaterPistol(player,ym,this),4,6);
+        this.addItem(new WaterPistol(player,ym,this),9,9);
     }
 
     @Override
     public int[] getPadCoords() {
-        return new int[]{2,1};
+        return this.padCoords;
     }
 
     @Override
