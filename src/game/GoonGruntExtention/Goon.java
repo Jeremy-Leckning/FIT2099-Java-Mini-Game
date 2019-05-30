@@ -38,7 +38,7 @@ public class Goon extends Actor {
     }
 
     // List of behaviours
-    private List<ActionFactory> actionFactories = new ArrayList<ActionFactory>();
+    private List<ActionFactory> actionFactories = new ArrayList<>();
 
     private void addBehaviour(ActionFactory behaviour) {
         actionFactories.add(behaviour);

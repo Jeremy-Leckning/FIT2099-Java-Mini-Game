@@ -8,7 +8,7 @@ import game.GameSkills;
 /**
  * Action to end Yugo Maxx's terror reign once his exoskeleton is destroyed.
  */
-public class KillYMAction extends Action {
+class KillYMAction extends Action {
     private YugoMaxx ym;
 
     /**

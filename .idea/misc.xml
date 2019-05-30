@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavadocGenerationManager">
-    <option name="OUTPUT_DIRECTORY" value="$USER_HOME$/Documents/Monash UNI/FIT 2099 - oo design/game docs" />
+    <option name="OUTPUT_DIRECTORY" value="$USER_HOME$/Documents/Monash UNI/FIT 2099 - oo design/assignment 3/design docs/javadocs" />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
