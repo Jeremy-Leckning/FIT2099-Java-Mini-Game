@@ -57,8 +57,8 @@ public class DoctorMaybe extends Actor {
                 return true;
             }
         }
-        // Otherwise, player isn't 1 block away -> return false
 
+        // Otherwise, player isn't 1 block away -> return false
         return false;
     }
 

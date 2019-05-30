@@ -1,7 +1,6 @@
 package game.MoonExpantion;
 
 import edu.monash.fit2099.engine.*;
-import game.MoonMap;
 
 /**
  * Water pistol weapon
@@ -29,7 +28,7 @@ public class WaterPistol extends Item implements IStorageTank {
 
     /**
      * Determines actions player can take with pistol
-     * @return
+     * @return allowable Actions
      */
     @Override
     public Actions getAllowableActions() {
@@ -41,15 +40,18 @@ public class WaterPistol extends Item implements IStorageTank {
             return actions;
         }
 
-        // Shoot water pistol
-        // Player must be on the moon
-        if( this.map.locationOf(this.player).map() instanceof MoonMap){
+        // Is picked up -> player can shoot if:
 
-            // YM must have exoskeleton
+        // Player is on same map as YM
+        if( this.map.locationOf(this.player).map() == this.map.locationOf(this.ym).map()){
+
+            // YM still has exoskeleton
             if (this.ym.hasSkeleton()) {
 
-                // need sight and pistol to be full
+                // Player to YM line of sight
                 if (this.lineOfSight()) {
+
+                    // Pistol is filled
                     if (this.isFilled()) {
 
                         // All conditions met -> actor can squirt
@@ -58,10 +60,7 @@ public class WaterPistol extends Item implements IStorageTank {
                 }
             }
         }
-
-
-
-        return actions;
+    return actions;
     }
 
     /**
@@ -83,6 +82,7 @@ public class WaterPistol extends Item implements IStorageTank {
             for (int x : xs) {
                 for (int y : ys) {
                     if (this.map.at(x, y).getGround().blocksThrownObjects())
+                        // Path is blocked -> false
                         return false;
                 }
             }

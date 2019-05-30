@@ -5,7 +5,7 @@ import edu.monash.fit2099.engine.*;
 /**
  * Action to fill a tank
  */
-class FillTank extends Action {
+class FillTankAction extends Action {
     private IStorageTank tank;
 
     /**
@@ -14,7 +14,7 @@ class FillTank extends Action {
      * precondition: tank cant be full
      * @throws IllegalArgumentException if tank is full
      */
-    FillTank(IStorageTank tank) throws IllegalArgumentException{
+    FillTankAction(IStorageTank tank) throws IllegalArgumentException{
         // Precondition: tank cant be full
         if(tank.isFilled()){
             throw new IllegalArgumentException("Tank can't be full to fill up");
@@ -39,7 +39,7 @@ class FillTank extends Action {
         }
         // Precondition: tank must be in player's inventory
         if (!actor.getInventory().contains((Item) this.tank)){
-            throw new IllegalArgumentException("Player must have pistol in inventory!");
+            throw new IllegalArgumentException("Player must have tank in inventory!");
         }
 
         // refill tank

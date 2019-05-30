@@ -4,7 +4,7 @@ import edu.monash.fit2099.engine.*;
 import game.IPlanetaryMap;
 
 /**
- * Rocket pad where Rocket body and engine can be placed
+ * Rocket pad where Rocket body and engine can be placed and where space travel happens
  */
 public class RocketPad extends Ground {
     private boolean engine = false;
@@ -14,6 +14,8 @@ public class RocketPad extends Ground {
 
     /**
      * Creates a Rocket Pad
+     * @param location Location of pad
+     * @param destination Destination map
      */
     public RocketPad(IPlanetaryMap destination, Location location) {
         super('~');
@@ -21,6 +23,9 @@ public class RocketPad extends Ground {
         this.location = location;
     }
 
+    /**
+     * @return Location of pad
+     */
     public Location getLocation(){
         return this.location;
     }
@@ -38,12 +43,12 @@ public class RocketPad extends Ground {
         // Ensure actor is player
         if (actor instanceof Player) {
 
-            // Rocket already built
+            // Rocket already built -> fly
             if (this.allParts()){
                 return this.getFlyAction(actor);
             }
 
-            // Else return placement actions or empty
+            // Else -> placement
             return this.getPlacementAction(actor);
         }
 
@@ -57,7 +62,9 @@ public class RocketPad extends Ground {
      */
     private Actions getFlyAction(Actor actor){
         Actions actions = new Actions();
+
         actions.add(new FlyAction(actor, this.destinationMap));
+
         return actions;
     }
 

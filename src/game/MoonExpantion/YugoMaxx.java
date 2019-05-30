@@ -13,13 +13,13 @@ public class YugoMaxx extends Actor {
      */
     public YugoMaxx() {
         super("Yugo Maxx", 'Y', 4, 1);
-        this.exoSkeleton = false;
+        this.exoSkeleton = true;
     }
 
     /**
-     * Records exoskeleton destructions
+     * Records exoskeleton destruction
      */
-    public void breakSkeleton(){
+    void breakSkeleton(){
         this.exoSkeleton = false;
     }
 
@@ -27,7 +27,7 @@ public class YugoMaxx extends Actor {
      * Determines if boss still has exoskeleton
      * @return true/false
      */
-    public boolean hasSkeleton(){
+    boolean hasSkeleton(){
         return this.exoSkeleton;
     }
 
@@ -41,13 +41,20 @@ public class YugoMaxx extends Actor {
     @Override
     public Actions getAllowableActions(Actor otherActor, String direction, GameMap map) {
 
-        // If YM has skeleton, he can't be attacked regularly
-        if (this.hasSkeleton()) {
-            return new Actions();
+        // Actor must be a player
+        if (otherActor instanceof Player){
+
+            // If YM has skeleton, he can't be attacked regularly
+            if (this.hasSkeleton()) {
+                return new Actions();
+            }
+
+            // Otherwise he can be killed
+            return new Actions( new KillYMAction(this));
         }
 
-        // Otherwise he can be killed
-        return new Actions( new KillYMAction(this));
+        // Other actors do nothing
+        return new Actions();
     }
 
 

@@ -11,27 +11,37 @@ import game.RocketExpantion.FlyAction;
 import java.util.Iterator;
 import java.util.List;
 
-public class MoonMap extends GameMap implements IPlanetaryMap {
+/**
+ * Moon Map
+ */
+class MoonMap extends GameMap implements IPlanetaryMap {
     private FlyAction flyAction;
 
-    public MoonMap(GroundFactory groundFactory, List<String> lines) {
+    /**
+     * Creates the moon
+     * @param groundFactory GF for moon
+     * @param lines model for mooon
+     */
+    MoonMap(GroundFactory groundFactory, List<String> lines) {
         super(groundFactory, lines);
     }
 
-    public void addActorsItems(Player player){
+    /**
+     * Sets all Actors and Items on Map, including keys to enemies inventory
+     * @param player player
+     */
+    void addActorsItems(Player player){
         // Enemies
         YugoMaxx ym = new YugoMaxx();
-        this.addActor(ym,1,1);
+        this.addActor(ym,7,7);
 
-        Goon goon3 = new Goon("Space Goon", player);
-        goon3.addItemToInventory(new Key());
-        this.addActor(goon3, 8, 9);
+        Goon goon = new Goon("Space Goon", player);
+        goon.addItemToInventory(new Key());
+        this.addActor(goon, 8, 9);
 
-        Grunt grunt2 = new Grunt("Space Grunt", player);
-        grunt2.addItemToInventory(new Key());
-        this.addActor(grunt2, 1, 6);
-
-
+        Grunt grunt = new Grunt("Space Grunt", player);
+        grunt.addItemToInventory(new Key());
+        this.addActor(grunt, 1, 6);
 
         // Water pistol
         this.addItem(new WaterPistol(player,ym,this),4,6);
@@ -60,8 +70,8 @@ public class MoonMap extends GameMap implements IPlanetaryMap {
     @Override
     public void killAll() {
         Iterator<Actor> all = this.actorLocations.iterator();
-        for (Iterator<Actor> it = all; it.hasNext(); ) {
-            this.removeActor(it.next());
+        while (all.hasNext()){
+            this.removeActor(all.next());
         }
     }
 }

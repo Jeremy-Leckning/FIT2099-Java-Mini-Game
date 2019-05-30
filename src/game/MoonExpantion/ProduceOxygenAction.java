@@ -43,6 +43,7 @@ class ProduceOxygenAction extends Action {
 
         // Record oxygen production begun
         dispenser.produceOxygen();
+
         return actor + "'s oxygen will be ready next turn";
     }
 

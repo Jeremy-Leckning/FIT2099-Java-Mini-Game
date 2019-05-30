@@ -2,7 +2,8 @@ package game.RocketExpantion;
 
 import edu.monash.fit2099.engine.*;
 import game.IPlanetaryMap;
-import game.MoonExpantion.GameSkills;
+import game.GameSkills;
+import game.EndGameAction;
 
 /**
  * Action to fly using rocket from map to map
@@ -17,7 +18,7 @@ public class FlyAction extends Action {
 	 * @param actor Actor who will fly
 	 * @param destination map to fly too
 	 * Precondition: Actor must be player, maps must be different
-	 * @throws IllegalArgumentException if actor is not player or if origin = destination
+	 * @throws IllegalArgumentException if actor is not player
 	 *
 	 */
 	public FlyAction(Actor actor, IPlanetaryMap destination) throws IllegalArgumentException{
@@ -28,7 +29,6 @@ public class FlyAction extends Action {
 
 		this.actor = actor;
 		this.destinationMap = destination;
-
 	}
 
 	/**
@@ -36,16 +36,22 @@ public class FlyAction extends Action {
 	 * @param actor The actor performing the action.
 	 * @param map The map the actor is on.
 	 * @return description of flight
+	 * Precondition: Destination map must be different to current map
+	 * @throws IllegalArgumentException If dest map == origin map
 	 */
 	@Override
-	public String execute(Actor actor, GameMap map) {
+	public String execute(Actor actor, GameMap map) throws IllegalArgumentException {
+		// Precondition: origin != destination
+		if (this.destinationMap == map){
+			throw new IllegalArgumentException("Cant fly to the same map...");
+		}
+
 		// Remove player from current map
 		map.removeActor(actor);
 
-		// Check if player has won
+		// If player has won -> must be flying back to earth -> Game over
 		if (this.gameOver(actor)){
-			this.destinationMap.killAll();
-			return  actor + " flies back to earth with Yugo Maxx's body and wins the game!";
+			return new EndGameAction(actor + " flies back to earth with Yugo Maxx's body and wins the game!").execute(actor,map);
 		}
 
 		else{
@@ -54,10 +60,16 @@ public class FlyAction extends Action {
 
 			// Add player to those coordinates
 			((GameMap) this.destinationMap).addActor(actor,coords[0],coords[1]);
+
 			return this.actor + " flies to " + this.destinationMap.getName();
 		}
 	}
 
+	/**
+	 * Detects if player has GAMEWINNER skills representing them carrying YM's body
+	 * @param actor Player
+	 * @return true if actor has defeated Yugo Maxx
+	 */
 	private boolean gameOver(Actor actor){
 		return actor.hasSkill(GameSkills.GAMEWINNER);
 	}

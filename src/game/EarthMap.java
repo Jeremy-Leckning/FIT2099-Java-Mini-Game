@@ -11,16 +11,27 @@ import game.RocketExpantion.*;
 import java.util.Iterator;
 import java.util.List;
 
-public class EarthMap extends GameMap implements IPlanetaryMap {
+/**
+ * Earth Map
+ */
+class EarthMap extends GameMap implements IPlanetaryMap {
     private FlyAction flyAction;
     private final int[] padCoords = new int[] {15,8};
 
-
-    public EarthMap (GroundFactory groundFactory, List<String> lines) {
+    /**
+     * Creates the Earth
+     * @param groundFactory GF for earth
+     * @param lines model
+     */
+    EarthMap(GroundFactory groundFactory, List<String> lines) {
         super(groundFactory, lines);
     }
 
-    public void addActorsItems(Player player){
+    /**
+     * Sets all Actors and Items on Map, including keys to enemies inventory
+     * @param player player
+     */
+    void addActorsItems(Player player){
         // NPCs
         Q q = new Q(100);
         this.addActor(q, 6, 6);
@@ -49,21 +60,21 @@ public class EarthMap extends GameMap implements IPlanetaryMap {
         RocketPlans plans = new RocketPlans();
         this.addItem(plans, 5, 2);
 
-        // Add space suit and Oxygen Dispenser to Earth map
+        // Add space suit
         SpaceSuit spaceSuit = new SpaceSuit();
         this.addItem(spaceSuit, 21, 5);
 
 
     }
 
-
+    /**
+     * Kills all actors on map to end game
+     */
     public void killAll(){
         Iterator<Actor> all = this.actorLocations.iterator();
-        for (Iterator<Actor> it = all; it.hasNext(); ) {
-            this.removeActor(it.next());
+        while (all.hasNext()){
+            this.removeActor(all.next());
         }
-
-
     }
 
     @Override

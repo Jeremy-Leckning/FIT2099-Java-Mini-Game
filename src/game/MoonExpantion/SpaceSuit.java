@@ -1,6 +1,7 @@
 package game.MoonExpantion;
 
 import edu.monash.fit2099.engine.Item;
+import game.GameSkills;
 
 /**
  * Space suit for space travel

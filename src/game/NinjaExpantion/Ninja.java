@@ -18,8 +18,6 @@ public class Ninja extends Actor {
     public Ninja(String name, Actor player) {
         super(name, 'n', 5, 5);
         this.target = player;
-
-
     }
 
     /**
@@ -36,6 +34,7 @@ public class Ninja extends Actor {
         if (player5BlocksAway(map)){
             return new ThrowAction(target);
         }
+
         // Otherwise Ninja does nothing
         return new SkipTurnAction();
     }
@@ -72,7 +71,6 @@ public class Ninja extends Actor {
                     }
                 }
             }
-
             // All criteria are met -> return true
             return true;
         }

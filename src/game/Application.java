@@ -25,6 +25,7 @@ public class Application {
 
 		Location moonPadLocation = moonMap.at(moonMap.getPadCoords()[0],moonMap.getPadCoords()[1]);
 		RocketPad moonPad = new RocketPad(earthMap, moonPadLocation);
+		// Moon pad already has rocket built
 		moonPad.placeBody();
 		moonPad.placeEngine();
 		moonMap.add(moonPad,moonPadLocation);
@@ -45,11 +46,6 @@ public class Application {
 		// Populate maps with enemies and items
 		earthMap.addActorsItems(player);
 		moonMap.addActorsItems(player);
-
-		// TESTING EDITS
-		player.addItemToInventory(new SpaceSuit());
-		earthPad.placeEngine();
-		earthPad.placeBody();
 
 		// StartGame
 		world.run();

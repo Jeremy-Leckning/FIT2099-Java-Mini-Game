@@ -1,6 +1,7 @@
 package game.MoonExpantion;
 
 import edu.monash.fit2099.engine.*;
+import game.GameSkills;
 
 /**
  * Ground found on the moon, cant be walked on by players without a space suit and oxygen

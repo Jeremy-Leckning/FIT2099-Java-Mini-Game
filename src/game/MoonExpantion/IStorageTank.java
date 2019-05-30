@@ -1,5 +1,8 @@
 package game.MoonExpantion;
 
+/**
+ * Interface for a storage item. Holds only 1 element
+ */
 interface IStorageTank {
 
     /**

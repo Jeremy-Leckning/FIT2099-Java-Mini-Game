@@ -5,7 +5,7 @@ import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.GameMap;
 
 /**
- * Action to place Rocket body and engine on the Rocket Pad
+ * Action to Exchange Rockets plans for rocket body from Q
  */
 class GivePlanAction extends Action {
 	private Actor actor;

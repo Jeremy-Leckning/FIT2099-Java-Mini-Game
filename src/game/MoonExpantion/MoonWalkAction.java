@@ -58,8 +58,10 @@ class MoonWalkAction extends MoveActorAction {
      * @param actor player
      * @param map current map
      * @return description of the move
+     * precondition: map must implement IPlanetaryMap
+     * @throws ClassCastException if map does not implement IPlanetaryMap
      */
-    private String emergencyExit(Actor actor, GameMap map){
+    private String emergencyExit(Actor actor, GameMap map) throws ClassCastException{
         String moveDescription = actor + " is out of oxygen! ";
 
         // Get current map's pad to generate a fly action and execute

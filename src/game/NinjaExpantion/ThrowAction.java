@@ -24,18 +24,27 @@ class ThrowAction extends Action {
      * @param actor The actor performing the action.
      * @param map The map the actor is on.
      * @return description of action performed
+     * Precondition: Actor must be a ninja
+     * @throws IllegalArgumentException if actor is not a ninja
      */
     @Override
-    public String execute(Actor actor, GameMap map) {
+    public String execute(Actor actor, GameMap map) throws IllegalArgumentException {
+
+        // Precondition: Actor must be a Ninja
+        if (!(actor instanceof Ninja)){
+            throw new IllegalArgumentException("Actor must be a Ninja!");
+        }
+
+
         String moveDescription = "";
 
-        // execute the throwing segment and append description to final description
+        // Throwing segment
         moveDescription += throwStunPowder(actor);
 
-        // Add punctuation to description
+        // +
         moveDescription += " and then ";
 
-        // execute the moving segment and append description to final description
+        // Moving segment
         moveDescription += moveNinja(actor,map);
 
         return moveDescription;

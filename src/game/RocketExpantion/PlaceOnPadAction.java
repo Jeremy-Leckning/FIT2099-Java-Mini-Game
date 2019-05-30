@@ -34,9 +34,16 @@ class PlaceOnPadAction extends Action {
      * @param actor The actor performing the action.
      * @param map The map the actor is on.
      * @return description of the action
+     * Precondition: Item must be in players inventory
+     * @throws IllegalArgumentException if item not in players inventory
      */
     @Override
-    public String execute(Actor actor, GameMap map) {
+    public String execute(Actor actor, GameMap map) throws IllegalArgumentException {
+        // Precondition: Actor must have item in inventory
+        if (!actor.getInventory().contains(this.item)){
+            throw new IllegalArgumentException(actor + " doesn't have " + this.item + " in inventory");
+        }
+
         String description = "";
 
         // Determine which item is being placed and update pad and description

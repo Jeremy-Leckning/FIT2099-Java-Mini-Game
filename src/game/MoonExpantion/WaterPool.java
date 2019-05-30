@@ -30,13 +30,15 @@ public class WaterPool extends Ground {
         if (actor instanceof Player){
             for (Item item : actor.getInventory()){
 
-                // Actor has a not filled water tank
-                if (item instanceof IStorageTank){
-                    if(!((IStorageTank) item).isFilled()){
-                        if (((IStorageTank) item).holds() == this.element){
+                // Player must have:
+                if (item instanceof IStorageTank){  // A storage tank
 
-                            // Actor can fill up
-                            actions.add(new FillTank((IStorageTank) item));
+                    if(!((IStorageTank) item).isFilled()){  // That isn't full
+
+                        if (((IStorageTank) item).holds() == this.element){     // That holds water
+
+                            // All conditions met -> Actor can fill up
+                            actions.add(new FillTankAction((IStorageTank) item));
                         }
                     }
                 }
