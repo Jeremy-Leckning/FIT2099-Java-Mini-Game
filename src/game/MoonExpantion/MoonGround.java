@@ -33,7 +33,7 @@ public class MoonGround extends Ground {
 				return new MoonWalkAction(location, direction, hotKey);
 			}
 
-			// Else player cant walk
+			// Else player can't walk
 			return null;
 		}
 

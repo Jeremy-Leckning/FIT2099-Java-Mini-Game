@@ -11,11 +11,11 @@ class FillTankAction extends Action {
     /**
      * Creates a fill action
      * @param tank an item with a tank
-     * precondition: tank cant be full
+     * precondition: tank can't be full
      * @throws IllegalArgumentException if tank is full
      */
     FillTankAction(IStorageTank tank) throws IllegalArgumentException{
-        // Precondition: tank cant be full
+        // Precondition: tank can't be full
         if(tank.isFilled()){
             throw new IllegalArgumentException("Tank can't be full to fill up");
         }

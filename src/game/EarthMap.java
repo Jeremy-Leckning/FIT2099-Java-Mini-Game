@@ -63,10 +63,6 @@ class EarthMap extends GameMap implements IPlanetaryMap {
         // Add space suit
         SpaceSuit spaceSuit = new SpaceSuit();
         this.addItem(spaceSuit, 21, 5);
-
-
-
-
     }
 
     /**
