@@ -1,6 +1,7 @@
 package game.RocketExpantion;
 
 import edu.monash.fit2099.engine.*;
+import game.GameSkills;
 import game.IPlanetaryMap;
 
 /**
@@ -63,7 +64,10 @@ public class RocketPad extends Ground {
     private Actions getFlyAction(Actor actor){
         Actions actions = new Actions();
 
-        actions.add(new FlyAction(actor, this.destinationMap));
+        // If player has spacesuit -> can fly
+        if (actor.hasSkill(GameSkills.SPACETRAVELLER)){
+            actions.add(new FlyAction(actor, this.destinationMap));
+        }
 
         return actions;
     }

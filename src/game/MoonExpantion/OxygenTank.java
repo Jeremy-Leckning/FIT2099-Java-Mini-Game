@@ -1,6 +1,5 @@
 package game.MoonExpantion;
 
-import edu.monash.fit2099.engine.DropItemAction;
 import edu.monash.fit2099.engine.Item;
 
 /**
@@ -18,9 +17,8 @@ class OxygenTank extends Item implements IStorageTank{
 
         this.pressure = 10;
 
-        // Oxygen tanks will be picked up straight from the oxygen dispenser, so will start with drop item
+        // Oxygen tanks will be picked up straight from the oxygen dispenser, and don't need to be dropped(crowds menu)
         this.allowableActions.clear();
-        this.allowableActions.add(new DropItemAction(this));
     }
 
     @Override

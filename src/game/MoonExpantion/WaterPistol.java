@@ -44,7 +44,7 @@ public class WaterPistol extends Item implements IStorageTank {
         // Is picked up -> player can shoot if:
 
         // YM still alive
-        if (this.player.hasSkill(GameSkills.GAMEWINNER)) {
+        if (!this.player.hasSkill(GameSkills.GAMEWINNER)) {
 
             // Player is on same map as YM
             if (this.map.locationOf(this.player).map() == this.map.locationOf(this.ym).map()) {
